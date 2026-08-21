@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pattern Studio 0.2</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+  <!-- =========================================================
+       ヘッダー
+  ========================================================= -->
+
+  <header>
+    <h1>Pattern Studio 0.2</h1>
+  </header>
+
+
+  <!-- =========================================================
+       アプリ全体
+  ========================================================= -->
+
+  <main class="app-container">
+
+
+    <!-- =========================================================
+         左サイドバー
+    ========================================================= -->
+
+    <aside
+      class="sidebar"
+      id="sidebar"
+    >
+
+
+      <!-- 寸法入力 -->
+
+      <details
+        class="control-card"
+        open
+      >
+
+        <summary>
+          <span>寸法入力</span>
+          <span class="card-arrow">⌄</span>
+        </summary>
+
+
+        <div class="card-content">
+
+          <label>
+            身長
+            <input
+              type="number"
+              id="height"
+            >
+          </label>
+
+
+          <label>
+            バスト
+            <input
+              type="number"
+              id="bust"
+            >
+          </label>
+
+
+          <label>
+            ウエスト
+            <input
+              type="number"
+              id="waist"
+            >
+          </label>
+
+
+          <label>
+            ヒップ
+            <input
+              type="number"
+              id="hip"
+            >
+          </label>
+
+
+          <label>
+            着丈
+            <input
+              type="number"
+              id="length"
+            >
+          </label>
+
+
+          <label>
+            背丈
+            <input
+              type="number"
+              id="backlength"
+            >
+          </label>
+
+
+          <label>
+            肩幅
+            <input
+              type="number"
+              id="shoulderWidth"
+            >
+          </label>
+
+
+          <label>
+            バストポイント
+            <input
+              type="number"
+              id="bustPoint"
+            >
+          </label>
+
+        </div>
+
+      </details>
+
+
+
+      <!-- ダーツ -->
+
+      <details
+        class="control-card"
+        open
+      >
+
+        <summary>
+          <span>ダーツ</span>
+          <span class="card-arrow">⌄</span>
+        </summary>
+
+
+        <div class="card-content">
+
+          <label>
+            前身頃ダーツ量
+
+            <input
+              type="number"
+              id="frontDartAmount"
+              value="2"
+              step="0.1"
+            >
+          </label>
+
+
+          <label>
+            後身頃ダーツ量
+
+            <input
+              type="number"
+              id="backDartAmount"
+              value="2"
+              step="0.1"
+            >
+          </label>
+
+        </div>
+
+      </details>
+
+
+
+      <!-- 縫い代 -->
+
+      <details class="control-card">
+
+        <summary>
+          <span>縫い代</span>
+          <span class="card-arrow">⌄</span>
+        </summary>
+
+
+        <div class="card-content">
+
+          <label for="seamAllowance">
+            縫い代幅
+          </label>
+
+
+          <select id="seamAllowance">
+
+            <option value="0">
+              なし
+            </option>
+
+            <option value="0.5">
+              0.5cm
+            </option>
+
+            <option
+              value="1"
+              selected
+            >
+              1cm
+            </option>
+
+            <option value="1.5">
+              1.5cm
+            </option>
+
+            <option value="2">
+              2cm
+            </option>
+
+          </select>
+
+
+          <button id="addSeamAllowanceButton">
+            縫い代を付ける
+          </button>
+
+        </div>
+
+      </details>
+
+
+
+      <!-- 印刷 -->
+
+      <details class="control-card">
+
+        <summary>
+          <span>印刷</span>
+          <span class="card-arrow">⌄</span>
+        </summary>
+
+
+        <div class="card-content">
+
+          <button id="printPreviewButton">
+            印刷用表示
+          </button>
+
+
+          <button id="printButton">
+            印刷する
+          </button>
+
+        </div>
+
+      </details>
+
+
+
+      <!-- 印刷設定 -->
+
+      <details class="control-card">
+
+        <summary>
+          <span>印刷設定</span>
+          <span class="card-arrow">⌄</span>
+        </summary>
+
+
+        <div class="card-content">
+
+          <label class="print-option">
+
+            <input
+              type="radio"
+              name="printMode"
+              value="fit"
+              checked
+            >
+
+            A4 1枚に収める
+
+          </label>
+
+
+          <label class="print-option">
+
+            <input
+              type="radio"
+              name="printMode"
+              value="split"
+            >
+
+            A4に分割して実寸印刷
+
+          </label>
+
+
+          <label for="printSeamAllowance">
+
+            のりしろ
+
+            <input
+              type="number"
+              id="printSeamAllowance"
+              value="10"
+              min="0"
+              step="1"
+            >
+
+          </label>
+
+        </div>
+
+      </details>
+
+
+
+      <!-- 方眼 -->
+
+      <button
+        id="toggleGridButton"
+        class="sidebar-action-button"
+      >
+        方眼を非表示
+      </button>
+
+
+
+      <!-- 型紙作成 -->
+
+      <button
+        id="createButton"
+        class="create-button"
+      >
+        型紙を作成
+      </button>
+
+
+
+      <!-- 左パネル収納 -->
+
+      <button
+        id="sidebarToggleButton"
+        class="sidebar-toggle"
+        type="button"
+      >
+        ◀
+      </button>
+
+    </aside>
+
+
+
+    <!-- =========================================================
+         右側ワークスペース
+    ========================================================= -->
+
+    <section
+      class="workspace"
+      id="workspace"
+    >
+
+
+      <!-- =======================================================
+           メインツールバー
+      ======================================================= -->
+
+      <div class="main-toolbar">
+
+
+        <!-- モード -->
+
+        <div class="toolbar-group mode-group">
+
+          <button
+            id="draftModeBtn"
+            class="toolbar-button"
+          >
+            製図モード
+          </button>
+
+
+          <button
+            id="editModeBtn"
+            class="toolbar-button"
+          >
+            編集モード
+          </button>
+
+        </div>
+
+
+
+        <!-- ズーム -->
+
+        <div class="toolbar-group zoom-group">
+
+          <button
+            id="zoomOutButton"
+            class="toolbar-button icon-button"
+          >
+            −
+          </button>
+
+
+          <button
+            id="resetZoomButton"
+            class="zoom-display"
+          >
+            100%
+          </button>
+
+
+          <button
+            id="zoomInButton"
+            class="toolbar-button icon-button"
+          >
+            ＋
+          </button>
+
+        </div>
+
+
+
+        <!-- Undo / Redo -->
+
+        <div class="toolbar-group history-group">
+
+          <button
+            id="undoButton"
+            class="toolbar-button"
+          >
+            ↶ 元に戻す
+          </button>
+
+
+          <button
+            id="redoButton"
+            class="toolbar-button"
+          >
+            ↷ やり直す
+          </button>
+
+        </div>
+
+
+
+        <!-- 保存 -->
+
+        <div class="toolbar-group file-group">
+
+          <button
+            id="saveButton"
+            class="toolbar-button"
+          >
+            保存
+          </button>
+
+
+          <button
+            id="loadButton"
+            class="toolbar-button"
+          >
+            読み込み
+          </button>
+
+
+          <input
+            type="file"
+            id="loadFile"
+            accept=".json"
+            hidden
+          >
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =======================================================
+           型紙キャンバス
+      ======================================================= -->
+
+      <div class="canvas-container">
+
+        <svg
+          id="canvas"
+          width="700"
+          height="900"
+          viewBox="0 0 700 900"
+        >
+        </svg>
+
+      </div>
+
+
+
+      <!-- =======================================================
+           下部パネル
+      ======================================================= -->
+
+      <div
+        class="bottom-panel"
+        id="bottomPanel"
+      >
+
+
+        <!-- 下部パネル収納ボタン -->
+
+        <button
+          id="bottomPanelToggle"
+          class="bottom-panel-toggle"
+          type="button"
+        >
+          ▼ パネルを収納
+        </button>
+
+
+
+        <!-- 下部パネル内容 -->
+
+        <div class="bottom-panel-content">
+
+
+          <!-- 選択中の線 -->
+
+          <details class="workspace-card">
+
+            <summary>
+
+              <span>
+                選択中の線
+              </span>
+
+              <span class="card-arrow">
+                ⌄
+              </span>
+
+            </summary>
+
+
+            <div class="workspace-card-content">
+
+              <div id="selectedLineName">
+                選択されていません
+              </div>
+
+
+              <div class="line-length">
+
+                長さ：
+
+                <span id="selectedLineLength">
+                  ---
+                </span>
+
+                cm
+
+              </div>
+
+            </div>
+
+          </details>
+
+
+
+          <!-- 線の編集 -->
+
+          <details class="workspace-card">
+
+            <summary>
+
+              <span>
+                線の編集
+              </span>
+
+              <span class="card-arrow">
+                ⌄
+              </span>
+
+            </summary>
+
+
+            <div class="workspace-card-content">
+
+              <p id="editPanelMessage">
+                編集する線を選択してください
+              </p>
+
+
+              <div class="line-edit-controls">
+
+                <button
+                  id="lineDecreaseButton"
+                >
+                  −
+                </button>
+
+
+                <input
+                  type="number"
+                  id="lineAdjustmentValue"
+                  value="0"
+                  step="0.1"
+                >
+
+
+                <button
+                  id="lineIncreaseButton"
+                >
+                  ＋
+                </button>
+
+              </div>
+
+            </div>
+
+          </details>
+
+
+
+          <!-- ポイント座標 -->
+
+          <details class="workspace-card">
+
+            <summary>
+
+              <span>
+                ポイント座標
+              </span>
+
+              <span class="card-arrow">
+                ⌄
+              </span>
+
+            </summary>
+
+
+            <div class="workspace-card-content">
+
+              <div id="pointList"></div>
+
+            </div>
+
+          </details>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =========================================================
+       JavaScript
+  ========================================================= -->
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>

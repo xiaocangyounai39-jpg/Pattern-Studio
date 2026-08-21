@@ -1,0 +1,2305 @@
+/* =========================================
+   基本設定
+========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Noto Sans JP",
+    sans-serif;
+
+  background: #eef1f4;
+  color: #222;
+}
+
+/* =========================================================
+   左サイドバー収納
+========================================================= */
+
+.sidebar {
+  position: relative;
+  transition:
+    width 0.25s ease,
+    min-width 0.25s ease,
+    padding 0.25s ease;
+}
+
+.sidebar.collapsed {
+  width: 52px;
+  min-width: 52px;
+  padding: 10px 8px;
+  overflow: hidden;
+}
+
+/* 収納時は中身を隠す */
+.sidebar.collapsed > *:not(.sidebar-toggle) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 収納ボタン */
+.sidebar-toggle {
+  position: absolute;
+  top: 18px;
+  right: 10px;
+
+  width: 32px;
+  height: 32px;
+
+  padding: 0;
+
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  font-size: 14px;
+  cursor: pointer;
+
+  z-index: 20;
+
+  transition:
+    background 0.15s ease,
+    transform 0.25s ease;
+}
+
+.sidebar-toggle:hover {
+  background: #f3f5f7;
+}
+
+/* 収納時 */
+.sidebar.collapsed .sidebar-toggle {
+  right: 10px;
+}
+
+/* =========================================
+   ヘッダー
+========================================= */
+
+header {
+  height: 56px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 20px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #d9dde2;
+
+  position: relative;
+  z-index: 10;
+}
+
+header h1 {
+  margin: 0;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+
+/* =========================================
+   アプリ全体
+========================================= */
+
+.app-container {
+  display: flex;
+
+  width: 100%;
+  height: calc(100vh - 56px);
+
+  overflow: hidden;
+}
+
+
+/* =========================================
+   左サイドバー
+========================================= */
+
+.sidebar {
+  width: 280px;
+  min-width: 280px;
+
+  height: 100%;
+
+  padding: 20px;
+
+  background: #ffffff;
+
+  border-right: 1px solid #d9dde2;
+
+  overflow-y: auto;
+}
+
+.sidebar h2 {
+  margin: 0 0 14px;
+
+  padding-bottom: 8px;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  border-bottom: 1px solid #e5e7eb;
+}
+
+
+/* =========================================
+   サイドバーのラベル・入力欄
+========================================= */
+
+.sidebar label {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  margin-bottom: 12px;
+
+  font-size: 13px;
+  color: #555;
+}
+
+.sidebar input {
+  width: 100%;
+
+  padding: 8px 10px;
+
+  border: 1px solid #cfd4da;
+  border-radius: 6px;
+
+  background: #ffffff;
+
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.sidebar input:focus {
+  border-color: #2d7ef7;
+
+  box-shadow:
+    0 0 0 3px rgba(45, 126, 247, 0.15);
+}
+
+
+/* =========================================
+   ダーツ
+========================================= */
+
+.sidebar h2:nth-of-type(2) {
+  margin-top: 26px;
+}
+
+
+/* =========================================
+   ボタン共通
+========================================= */
+
+button {
+  border: 1px solid #d4d8dd;
+  border-radius: 6px;
+
+  padding: 8px 12px;
+
+  background: #ffffff;
+
+  color: #333;
+
+  font-family: inherit;
+  font-size: 13px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.1s;
+}
+
+button:hover {
+  background: #f2f4f6;
+  border-color: #bfc5cc;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   型紙作成ボタン
+========================================= */
+
+#createButton {
+  width: 100%;
+
+  margin-top: 8px;
+
+  padding: 11px;
+
+  border: none;
+
+  background: #2d7ef7;
+  color: white;
+
+  font-weight: 700;
+  font-size: 14px;
+}
+
+#createButton:hover {
+  background: #1e6de0;
+}
+
+
+/* =========================================
+   右側ワークスペース
+========================================= */
+
+.workspace {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background: #e7eaee;
+}
+
+
+/* =========================================
+   上部ツールバー
+========================================= */
+
+.mode-toolbar,
+.zoom-toolbar,
+.history-toolbar {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 8px 10px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #d9dde2;
+}
+
+
+/* モード切り替え */
+
+.mode-toolbar {
+  min-height: 46px;
+}
+
+
+/* ズーム操作 */
+
+.zoom-toolbar {
+  position: absolute;
+
+  top: 72px;
+  right: 24px;
+
+  z-index: 5;
+
+  border: 1px solid #d9dde2;
+  border-radius: 8px;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Undo / Redo */
+
+.history-toolbar {
+  position: absolute;
+
+  top: 72px;
+  right: 220px;
+
+  z-index: 5;
+
+  border: 1px solid #d9dde2;
+  border-radius: 8px;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================
+   モードボタン
+========================================= */
+
+#draftModeBtn,
+#editModeBtn {
+  min-width: 100px;
+}
+
+
+/* =========================================
+   キャンバスコンテナ
+========================================= */
+
+.canvas-container {
+  flex: 1;
+
+  width: 100%;
+
+  overflow: auto;
+
+  position: relative;
+
+  padding: 40px;
+
+  background: #dfe3e7;
+
+  cursor: grab;
+}
+
+.canvas-container:active {
+  cursor: grabbing;
+}
+
+
+/* =========================================
+   SVGキャンバス
+========================================= */
+
+#canvas {
+  display: block;
+
+  width: 700px;
+  height: 900px;
+
+  min-width: 700px;
+  min-height: 900px;
+
+  background: white;
+
+  border: 1px solid #c8ccd0;
+
+  box-shadow:
+    0 3px 14px rgba(0, 0, 0, 0.12);
+
+  transform-origin: top left;
+
+  transition:
+    transform 0.05s linear;
+}
+
+
+/* =========================================
+   ポイント一覧パネル
+========================================= */
+
+.point-panel {
+  position: absolute;
+
+  right: 24px;
+  bottom: 24px;
+
+  width: 220px;
+
+  max-height: 260px;
+
+  padding: 12px;
+
+  background: #ffffff;
+
+  border: 1px solid #d9dde2;
+  border-radius: 8px;
+
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.1);
+
+  z-index: 5;
+}
+
+.point-panel h3 {
+  margin: 0 0 8px;
+
+  font-size: 13px;
+}
+
+
+/* =========================================
+   ポイント一覧
+========================================= */
+
+#pointList {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  max-height: 190px;
+
+  overflow-y: auto;
+}
+
+.point-row {
+  display: grid;
+
+  grid-template-columns:
+    1.4fr
+    1fr
+    1fr;
+
+  gap: 8px;
+
+  padding: 6px 8px;
+
+  background: #f7f8fa;
+
+  border-radius: 4px;
+
+  font-size: 11px;
+
+  align-items: center;
+}
+
+.point-row span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.point-panel {
+  width: 280px;
+}
+
+
+/* =========================================
+   型紙線
+========================================= */
+
+.pattern-curve,
+.pattern-selectable {
+  pointer-events: stroke;
+
+  cursor: pointer;
+}
+
+
+/* =========================================
+   選択中の型紙線
+========================================= */
+
+.pattern-selected {
+  stroke: #ff5c5c !important;
+  stroke-width: 4 !important;
+}
+
+
+/* =========================================
+   編集ポイント
+========================================= */
+
+.pattern-point {
+  cursor: grab;
+
+  transition:
+    r 0.1s;
+}
+
+.pattern-point:hover {
+  r: 4;
+}
+
+.pattern-label {
+  user-select: none;
+
+  pointer-events: none;
+
+  font-weight: bold;
+
+  fill: #333;
+}
+
+
+/* =========================================
+   ダーツ
+========================================= */
+
+.dart-line,
+.dart-center-line,
+.dart-label {
+  pointer-events: none;
+}
+
+.dart-label {
+  fill: #333;
+
+  user-select: none;
+}
+
+
+/* =========================================
+   スクロールバー
+========================================= */
+
+.sidebar::-webkit-scrollbar,
+.canvas-container::-webkit-scrollbar,
+#pointList::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.canvas-container::-webkit-scrollbar-thumb,
+#pointList::-webkit-scrollbar-thumb {
+  background: #b8bdc3;
+
+  border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-track,
+.canvas-container::-webkit-scrollbar-track,
+#pointList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+/* =========================================
+   小さい画面
+========================================= */
+
+@media (max-width: 900px) {
+
+  .sidebar {
+    width: 230px;
+    min-width: 230px;
+
+    padding: 14px;
+  }
+
+  .canvas-container {
+    padding: 20px;
+  }
+
+  .point-panel {
+    display: none;
+  }
+
+  .history-toolbar {
+    right: 180px;
+  }
+
+}
+
+
+/* =========================================
+   非常に小さい画面
+========================================= */
+
+@media (max-width: 650px) {
+
+  header {
+    height: 50px;
+  }
+
+  .app-container {
+    flex-direction: column;
+
+    height: calc(100vh - 50px);
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 0;
+
+    height: 38%;
+
+    border-right: none;
+    border-bottom: 1px solid #d9dde2;
+  }
+
+  .workspace {
+    height: 62%;
+  }
+
+  .zoom-toolbar {
+    display: none;
+  }
+
+  .history-toolbar {
+    position: static;
+
+    border-radius: 0;
+
+    box-shadow: none;
+  }
+
+}
+.selection-panel {
+  margin-top: 12px;
+  padding: 10px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+}
+
+.selection-panel h3 {
+  margin: 0 0 6px;
+  font-size: 14px;
+}
+
+#selectedLineName {
+  font-size: 13px;
+  font-weight: bold;
+  color: #555;
+}
+/* =========================================
+   線の編集パネル
+========================================= */
+
+.line-edit-panel {
+  margin-top: 12px;
+  padding: 10px;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+}
+
+.line-edit-panel h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+#editPanelMessage {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: #666;
+}
+
+.line-edit-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.line-edit-controls button {
+  width: 36px;
+  height: 32px;
+  padding: 0;
+  font-size: 18px;
+}
+
+#lineAdjustmentValue {
+  min-width: 50px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* =========================================
+   選択中の線の長さ
+========================================= */
+
+.line-length {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #eeeeee;
+  font-size: 12px;
+  color: #666;
+}
+
+#selectedLineLength {
+  font-weight: 700;
+  color: #333;
+}
+/* =========================================================
+   印刷用表示
+========================================================= */
+
+.print-preview .pattern-point {
+  display: none;
+}
+
+.print-preview .curve-control-point {
+  display: none;
+}
+
+.print-preview .pattern-selected {
+  stroke: black;
+}
+/* =========================================================
+   印刷時の設定
+========================================================= */
+
+@media print {
+
+  /* ページ全体 */
+  body {
+    margin: 0;
+    padding: 0;
+    background: white;
+  }
+
+  /* ボタンや操作パネルを全部消す */
+  button,
+  input,
+  select,
+  label,
+  .sidebar,
+  .control-panel,
+  .toolbar,
+  .print-panel {
+    display: none !important;
+  }
+
+  /* キャンバスの周りを整える */
+  .canvas-container {
+    display: block !important;
+    overflow: visible !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* SVG型紙を表示 */
+  #canvas {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+
+    transform: none !important;
+  }
+
+  /* 編集用ポイントを印刷しない */
+  .pattern-point,
+  .curve-control-point {
+    display: none !important;
+  }
+}
+  /* =========================================================
+   印刷時の設定
+========================================================= */
+
+@media print {
+
+  /* ページ全体 */
+  html,
+  body {
+    width: 100%;
+    height: auto;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+
+  /* 上部タイトルを消す */
+  header,
+  .header,
+  h1,
+  .app-title {
+    display: none !important;
+  }
+
+  /* サイドバー・操作パネルを消す */
+  .sidebar,
+  .control-panel,
+  .toolbar,
+  .print-panel,
+  .edit-panel,
+  .mode-toolbar,
+  .zoom-toolbar,
+  .history-toolbar,
+  .point-panel,
+  .selection-panel,
+  .line-edit-panel {
+    display: none !important;
+  }
+
+  /* キャンバス周辺 */
+  .app-container,
+  .workspace {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .canvas-container {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: white !important;
+  }
+
+  /* SVG型紙 */
+  #canvas {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    margin: 0 auto !important;
+    border: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  /* 編集用の点を消す */
+  .pattern-point,
+  .curve-control-point {
+    display: none !important;
+  }
+
+  /* 選択中の赤い線を黒に戻す */
+  .pattern-selected {
+    stroke: black !important;
+  }
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: white;
+}
+
+.print-page {
+  width: 210mm;
+  height: 297mm;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+
+  page-break-after: always;
+  break-after: page;
+}
+
+.print-page:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+.print-page svg {
+  width: 210mm !important;
+  height: 297mm !important;
+
+  display: block;
+}
+}
+/* =========================================
+   印刷設定パネル
+========================================= */
+
+.print-panel {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.print-panel h2 {
+  margin-bottom: 12px;
+}
+
+/* 印刷方法の選択肢 */
+.print-option {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 10px !important;
+
+  font-size: 13px;
+  color: #444;
+
+  cursor: pointer;
+}
+
+/* ラジオボタン */
+.print-option input[type="radio"] {
+  width: auto;
+  margin: 0;
+
+  cursor: pointer;
+}
+
+/* 印刷ボタン */
+#printButton {
+  width: 100%;
+
+  margin-top: 8px;
+  padding: 10px;
+
+  background: #2d7ef7;
+  color: white;
+
+  border: none;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+#printButton:hover {
+  background: #1e6de0;
+}
+
+#a4PreviewButton {
+  padding: 8px 14px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#a4PreviewButton:hover {
+  background: #f0f4f8;
+}
+/* =========================================================
+   A4分割印刷
+   ========================================================= */
+
+@media print {
+
+  /* 通常画面の要素を非表示 */
+  body.a4-printing > * {
+    display: none !important;
+  }
+
+  /* A4印刷用コンテナ */
+  #a4PrintContainer {
+    display: block !important;
+  }
+
+  /* 1ページ = A4 */
+  .a4-print-page {
+    width: 210mm;
+    height: 297mm;
+    page-break-after: always;
+    break-after: page;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* 最後のページ */
+  .a4-print-page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  /* 印刷用SVG */
+  .a4-print-page svg {
+    width: 210mm;
+    height: 297mm;
+    display: block;
+  }
+}
+
+
+/* =========================================================
+   A4印刷コンテナ
+   ========================================================= */
+
+#a4PrintContainer {
+  display: none;
+}
+
+/* =========================================================
+   入力パネル
+========================================================= */
+
+.sidebar {
+  position: relative;
+  transition:
+    width 0.25s ease,
+    min-width 0.25s ease,
+    padding 0.25s ease;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+}
+
+.panel-toggle {
+  width: 34px;
+  height: 34px;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 8px;
+
+  background: #e9edf2;
+  color: #333;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.panel-toggle:hover {
+  background: #dce2e8;
+}
+
+.panel-toggle:active {
+  transform: scale(0.94);
+}
+
+.sidebar-content {
+  overflow: hidden;
+
+  max-height: 2000px;
+
+  opacity: 1;
+
+  transition:
+    max-height 0.3s ease,
+    opacity 0.2s ease;
+}
+
+
+/* =========================================================
+   収納状態
+========================================================= */
+
+.sidebar.collapsed {
+  min-width: 64px;
+  width: 64px;
+
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.sidebar.collapsed .sidebar-header {
+  justify-content: center;
+}
+
+.sidebar.collapsed .sidebar-header h2 {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-content {
+  max-height: 0;
+  opacity: 0;
+}
+
+
+/* =========================================================
+   入力欄
+========================================================= */
+
+.sidebar input,
+.sidebar select {
+  width: 100%;
+
+  min-height: 38px;
+
+  padding: 7px 10px;
+
+  border: 1px solid #cfd6dd;
+  border-radius: 7px;
+
+  background: #fff;
+
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.sidebar input:focus,
+.sidebar select:focus {
+  outline: none;
+
+  border-color: #7b8794;
+
+  box-shadow:
+    0 0 0 3px rgba(100, 120, 140, 0.12);
+}
+
+
+/* =========================================================
+   ボタン
+========================================================= */
+
+.sidebar button {
+  min-height: 38px;
+
+  border: none;
+  border-radius: 7px;
+
+  padding: 8px 12px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.sidebar button:hover {
+  opacity: 0.88;
+}
+
+.sidebar button:active {
+  transform: scale(0.98);
+}
+
+/* =========================================================
+   メインツールバー
+========================================================= */
+
+.main-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  width: 100%;
+
+  padding: 8px 10px;
+
+  background: #ffffff;
+
+  border: 1px solid #dfe4e8;
+  border-radius: 10px;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.05);
+
+  overflow-x: auto;
+}
+
+
+/* =========================================================
+   ツールバーグループ
+========================================================= */
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  padding-right: 8px;
+
+  border-right: 1px solid #e1e5e9;
+}
+
+.toolbar-group:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+
+/* =========================================================
+   ボタン
+========================================================= */
+
+.toolbar-button,
+.zoom-display {
+  height: 36px;
+
+  padding: 0 12px;
+
+  border: none;
+  border-radius: 7px;
+
+  background: #f1f3f5;
+
+  color: #333;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.toolbar-button:hover {
+  background: #e5e9ed;
+}
+
+.toolbar-button:active {
+  transform: scale(0.96);
+}
+
+
+/* =========================================================
+   ズーム
+========================================================= */
+
+.icon-button {
+  width: 36px;
+
+  padding: 0;
+
+  font-size: 20px;
+}
+
+.zoom-display {
+  min-width: 58px;
+
+  background: #ffffff;
+
+  border: 1px solid #dfe4e8;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   モードボタン
+========================================================= */
+
+.mode-group .toolbar-button {
+  min-width: 92px;
+}
+
+
+/* =========================================================
+   ツールバー スクロール
+========================================================= */
+
+.main-toolbar::-webkit-scrollbar {
+  height: 5px;
+}
+
+.main-toolbar::-webkit-scrollbar-thumb {
+  background: #cbd1d6;
+  border-radius: 10px;
+}
+/* =========================================================
+   収納式パネル
+========================================================= */
+
+.control-card,
+.workspace-card {
+  background: #ffffff;
+  border: 1px solid #dfe3e8;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+
+/* タイトル */
+
+.control-card summary,
+.workspace-card summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 14px 16px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  list-style: none;
+
+  user-select: none;
+}
+
+
+/* デフォルトの三角を消す */
+
+.control-card summary::-webkit-details-marker,
+.workspace-card summary::-webkit-details-marker {
+  display: none;
+}
+
+
+/* 矢印 */
+
+.card-arrow {
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+
+/* 開いているとき */
+
+.control-card[open] .card-arrow,
+.workspace-card[open] .card-arrow {
+  transform: rotate(180deg);
+}
+
+
+/* 中身 */
+
+.card-content,
+.workspace-card-content {
+  padding: 4px 16px 16px;
+}
+
+
+/* ラベル */
+
+.card-content label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  margin-top: 10px;
+
+  font-size: 13px;
+}
+
+
+/* 入力 */
+
+.card-content input {
+  width: 100%;
+  padding: 8px 10px;
+
+  border: 1px solid #d5dbe1;
+  border-radius: 7px;
+
+  background: #f8f9fa;
+
+  font-size: 14px;
+}
+
+
+/* フォーカス */
+
+.card-content input:focus {
+  outline: none;
+  border-color: #888;
+  background: #ffffff;
+}
+
+
+/* 右側パネル */
+
+.workspace-card {
+  margin-top: 10px;
+}
+
+
+/* 線の長さ */
+
+.line-length {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+
+/* 線編集 */
+
+.line-edit-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.line-edit-controls button {
+  width: 38px;
+  height: 38px;
+
+  border: none;
+  border-radius: 8px;
+
+  font-size: 20px;
+
+  cursor: pointer;
+}
+
+
+.line-edit-controls input {
+  width: 90px;
+  height: 38px;
+
+  border: 1px solid #d5dbe1;
+  border-radius: 8px;
+
+  text-align: center;
+}
+/* =========================================================
+   左サイドバー
+========================================================= */
+
+.sidebar {
+  position: relative;
+
+  width: 280px;
+  min-width: 280px;
+
+  background: #ffffff;
+
+  border-right: 1px solid #dfe3e8;
+
+  padding: 18px;
+
+  overflow-y: auto;
+
+  transition:
+    width 0.25s ease,
+    min-width 0.25s ease,
+    padding 0.25s ease;
+}
+
+
+/* 収納された状態 */
+
+.sidebar.collapsed {
+  width: 52px;
+  min-width: 52px;
+
+  padding: 10px 8px;
+
+  overflow: hidden;
+}
+
+
+/* 中身を隠す */
+
+.sidebar.collapsed > *:not(.sidebar-toggle) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+/* 収納ボタン */
+
+.sidebar-toggle {
+  position: absolute;
+
+  top: 18px;
+  right: 10px;
+
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  z-index: 10;
+}
+
+
+/* ホバー */
+
+.sidebar-toggle:hover {
+  background: #f3f5f7;
+}
+
+
+/* 閉じたとき */
+
+.sidebar.collapsed .sidebar-toggle {
+  right: 10px;
+
+  transform: rotate(180deg);
+}
+/* =========================================================
+   下部パネル収納
+========================================================= */
+
+.bottom-panel {
+  position: relative;
+  background: #eef1f4;
+  border-top: 1px solid #d9dde2;
+  padding: 10px 14px 14px;
+  transition:
+    height 0.25s ease,
+    padding 0.25s ease;
+}
+
+
+/* 収納ボタン */
+
+.bottom-panel-toggle {
+  display: block;
+  margin: 0 auto 8px;
+
+  padding: 7px 14px;
+
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+
+/* パネル内部 */
+
+.bottom-panel-content {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+
+  max-height: 300px;
+  opacity: 1;
+
+  overflow: hidden;
+
+  transition:
+    max-height 0.25s ease,
+    opacity 0.2s ease;
+}
+
+
+/* 収納状態 */
+
+.bottom-panel.collapsed {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+
+/* 中身を収納 */
+
+.bottom-panel.collapsed .bottom-panel-content {
+
+  max-height: 0;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+
+/* 下部カード */
+
+.bottom-panel .workspace-card {
+
+  margin: 0;
+}
+
+
+/* =========================================================
+   左パネル収納
+========================================================= */
+
+.sidebar {
+  position: relative;
+  transition:
+    width 0.25s ease,
+    min-width 0.25s ease,
+    padding 0.25s ease;
+}
+
+/* 収納された状態 */
+.sidebar.collapsed {
+  width: 52px;
+  min-width: 52px;
+  padding: 10px 8px;
+  overflow: hidden;
+}
+
+/* パネルの中身を隠す */
+.sidebar.collapsed > *:not(.sidebar-toggle) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 収納ボタン */
+.sidebar-toggle {
+  position: absolute;
+  top: 18px;
+  right: 10px;
+
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  cursor: pointer;
+
+  font-size: 14px;
+  z-index: 20;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.sidebar-toggle:hover {
+  background: #f3f5f7;
+}
+
+/* 収納時 */
+.sidebar.collapsed .sidebar-toggle {
+  right: 10px;
+}
+
+
+/* =========================================================
+   下部パネル 小さい画面対応
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .bottom-panel-content {
+
+    grid-template-columns: 1fr;
+
+  }
+
+}
+/* =========================================================
+   左サイドバー収納
+========================================================= */
+
+.sidebar {
+  position: relative;
+  transition:
+    width 0.25s ease,
+    min-width 0.25s ease,
+    padding 0.25s ease;
+}
+
+/* 収納状態 */
+.sidebar.collapsed {
+  width: 52px !important;
+  min-width: 52px !important;
+  padding: 10px 8px !important;
+  overflow: hidden;
+}
+
+/* 中身を隠す */
+.sidebar.collapsed > *:not(.sidebar-toggle) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 三角ボタン */
+.sidebar-toggle {
+  position: absolute !important;
+
+  top: 18px;
+  right: 10px;
+
+  width: 32px !important;
+  height: 32px !important;
+
+  padding: 0 !important;
+
+  border: 1px solid #dfe3e8 !important;
+  border-radius: 8px !important;
+
+  background: #ffffff !important;
+
+  font-size: 14px !important;
+
+  cursor: pointer;
+  z-index: 100;
+}
+
+.sidebar-toggle:hover {
+  background: #f3f5f7 !important;
+}
+/* =========================================================
+   サイドバー収納
+========================================================= */
+
+.sidebar {
+  position: relative !important;
+  transition:
+    width 0.25s ease,
+    min-width 0.25s ease,
+    padding 0.25s ease !important;
+}
+
+.sidebar.collapsed {
+  width: 52px !important;
+  min-width: 52px !important;
+  padding: 10px 8px !important;
+  overflow: hidden !important;
+}
+
+.sidebar.collapsed > *:not(.sidebar-toggle) {
+  display: none !important;
+}
+
+.sidebar-toggle {
+  position: absolute !important;
+  top: 18px !important;
+  right: 10px !important;
+
+  width: 32px !important;
+  height: 32px !important;
+
+  padding: 0 !important;
+
+  z-index: 999 !important;
+
+  cursor: pointer !important;
+}
+/* =========================================================
+   左サイドバー収納
+========================================================= */
+
+.sidebar {
+  position: relative;
+  transition:
+    width 0.25s ease,
+    min-width 0.25s ease;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  top: 18px;
+  right: 10px;
+
+  width: 32px;
+  height: 32px;
+
+  padding: 0;
+
+  z-index: 100;
+
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+
+  background: #ffffff;
+
+  cursor: pointer;
+}
+
+.sidebar-toggle:hover {
+  background: #f1f3f5;
+}
+
+.sidebar.collapsed {
+  width: 52px !important;
+  min-width: 52px !important;
+  padding: 10px 8px !important;
+  overflow: hidden;
+}
+
+.sidebar.collapsed > *:not(.sidebar-toggle) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar.collapsed .sidebar-toggle {
+  opacity: 1;
+  pointer-events: auto;
+  right: 10px;
+}
+/* =========================================================
+   下部パネル収納
+========================================================= */
+
+.bottom-panel {
+  position: relative;
+  background: #eef1f4;
+  border-top: 1px solid #dfe3e8;
+
+  transition:
+    max-height 0.25s ease,
+    padding 0.25s ease;
+}
+
+/* 収納ボタン */
+
+.bottom-panel-toggle {
+  display: block;
+
+  width: 100%;
+  height: 36px;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 0;
+
+  background: #ffffff;
+
+  color: #444;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  border-bottom: 1px solid #dfe3e8;
+}
+
+.bottom-panel-toggle:hover {
+  background: #f3f5f7;
+}
+
+/* パネル内容 */
+
+.bottom-panel-content {
+  display: flex;
+  gap: 10px;
+
+  padding: 10px;
+
+  max-height: 260px;
+
+  overflow-y: auto;
+
+  transition:
+    max-height 0.25s ease,
+    opacity 0.2s ease;
+}
+
+/* 各カード */
+
+.bottom-panel-content .workspace-card {
+  flex: 1;
+  min-width: 180px;
+  margin: 0;
+}
+
+/* =========================================================
+   収納状態
+========================================================= */
+
+.bottom-panel.collapsed .bottom-panel-content {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  opacity: 0;
+
+  overflow: hidden;
+}
+/* =========================================================
+   スマホ対応
+========================================================= */
+
+@media (max-width: 650px) {
+
+  /* -----------------------------------------
+     全体
+  ----------------------------------------- */
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    font-size: 14px;
+  }
+
+
+  /* -----------------------------------------
+     ヘッダー
+  ----------------------------------------- */
+
+  header {
+    height: 52px;
+    padding: 0 14px;
+  }
+
+  header h1 {
+    font-size: 17px;
+  }
+
+
+  /* -----------------------------------------
+     アプリ全体
+  ----------------------------------------- */
+
+  .app-container {
+    position: relative;
+
+    width: 100%;
+    height: calc(100vh - 52px);
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+  }
+
+
+  /* -----------------------------------------
+     左サイドバー
+  ----------------------------------------- */
+
+  .sidebar {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    min-width: 0;
+
+    height: auto;
+    max-height: 75vh;
+
+    padding: 10px;
+
+    z-index: 50;
+
+    border-right: none;
+    border-bottom: 1px solid #dfe3e8;
+
+    box-shadow:
+      0 4px 15px rgba(0, 0, 0, 0.12);
+
+    overflow-y: auto;
+  }
+
+
+  /* 収納時 */
+
+  .sidebar.collapsed {
+    width: 100%;
+    min-width: 0;
+
+    height: 48px;
+
+    padding: 8px 10px;
+
+    overflow: hidden;
+  }
+
+
+  /* 収納時は中身を隠す */
+
+  .sidebar.collapsed > *:not(.sidebar-toggle) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+
+  /* -----------------------------------------
+     左パネル収納ボタン
+  ----------------------------------------- */
+
+  .sidebar-toggle {
+    top: 8px;
+    right: 10px;
+
+    width: 34px;
+    height: 34px;
+
+    font-size: 16px;
+
+    z-index: 100;
+  }
+
+
+  /* -----------------------------------------
+     ワークスペース
+  ----------------------------------------- */
+
+  .workspace {
+    width: 100%;
+    height: 100%;
+
+    min-height: 0;
+
+    flex: 1;
+
+    overflow: hidden;
+  }
+
+
+  /* -----------------------------------------
+     メインツールバー
+  ----------------------------------------- */
+
+  .main-toolbar {
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 6px;
+
+    gap: 5px;
+
+    border-radius: 0;
+
+    overflow-x: auto;
+
+    white-space: nowrap;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+
+  .toolbar-group {
+    flex-shrink: 0;
+
+    padding-right: 5px;
+  }
+
+
+  .toolbar-button,
+  .zoom-display {
+    height: 38px;
+
+    padding: 0 10px;
+
+    font-size: 13px;
+  }
+
+
+  .icon-button {
+    width: 38px;
+
+    padding: 0;
+
+    font-size: 20px;
+  }
+
+
+  /* -----------------------------------------
+     キャンバス
+  ----------------------------------------- */
+
+  .canvas-container {
+    width: 100%;
+    height: 100%;
+
+    padding: 20px;
+
+    overflow: auto;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+
+  #canvas {
+    width: 700px;
+    height: 900px;
+
+    min-width: 700px;
+    min-height: 900px;
+  }
+
+
+  /* -----------------------------------------
+     下部パネル
+  ----------------------------------------- */
+
+  .bottom-panel {
+    width: 100%;
+
+    flex-shrink: 0;
+  }
+
+
+  .bottom-panel-content {
+    display: flex;
+
+    flex-direction: column;
+
+    width: 100%;
+
+    max-height: 40vh;
+
+    overflow-y: auto;
+
+    padding: 8px;
+  }
+
+
+  .bottom-panel-content .workspace-card {
+    width: 100%;
+    min-width: 0;
+  }
+
+
+  /* -----------------------------------------
+     パネルの文字
+  ----------------------------------------- */
+
+  .workspace-card summary,
+  .control-card summary {
+    min-height: 44px;
+
+    padding: 12px 14px;
+
+    font-size: 14px;
+  }
+
+
+  /* -----------------------------------------
+     入力欄
+  ----------------------------------------- */
+
+  .card-content input,
+  .card-content select,
+  .sidebar input,
+  .sidebar select {
+    min-height: 42px;
+
+    font-size: 16px;
+  }
+
+
+  /* -----------------------------------------
+     ボタン
+  ----------------------------------------- */
+
+  .sidebar button {
+    min-height: 42px;
+
+    font-size: 14px;
+  }
+
+
+  #createButton {
+    min-height: 46px;
+
+    font-size: 15px;
+  }
+
+
+  /* -----------------------------------------
+     線編集
+  ----------------------------------------- */
+
+  .line-edit-controls button {
+    width: 44px;
+    height: 44px;
+  }
+
+
+  .line-edit-controls input {
+    width: 100px;
+    height: 44px;
+
+    font-size: 16px;
+  }
+
+}
+/* =========================================================
+   スマホ版 左パネル
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .sidebar {
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    max-height: 75vh;
+
+    transform: translateY(0);
+
+    transition:
+      transform 0.25s ease,
+      height 0.25s ease;
+  }
+
+  /* 収納 */
+  .sidebar.collapsed {
+    height: 48px;
+
+    transform: translateY(0);
+
+    overflow: hidden;
+  }
+
+  /* パネル内部 */
+  .sidebar > .control-card,
+  .sidebar > .sidebar-action-button,
+  .sidebar > .create-button {
+    transition:
+      opacity 0.2s ease;
+  }
+
+  /* 収納時は中身を隠す */
+  .sidebar.collapsed > .control-card,
+  .sidebar.collapsed > .sidebar-action-button,
+  .sidebar.collapsed > .create-button {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* 収納ボタンは常に表示 */
+  .sidebar-toggle {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+
+    position: absolute;
+
+    top: 7px;
+    right: 10px;
+
+    width: 34px;
+    height: 34px;
+
+    z-index: 100;
+  }
+
+}
