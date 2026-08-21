@@ -1,0 +1,68 @@
+{
+  "version": "0.2",
+  "measurements": {
+    "height": 155,
+    "bust": 60,
+    "waist": 40,
+    "hip": 60,
+    "length": 40,
+    "backlength": 40,
+    "shoulderWidth": 20,
+    "bustPoint": 20
+  },
+  "frontDartAmount": 2,
+  "backDartAmount": 2,
+  "patternPoints": {
+    "frontShoulder": {
+      "x": 192,
+      "y": 48,
+      "name": "前肩先",
+      "part": "front"
+    },
+    "frontArmhole": {
+      "x": 200,
+      "y": 215.99999999999997,
+      "name": "前袖ぐり",
+      "part": "front"
+    },
+    "frontWaist": {
+      "x": 150,
+      "y": 430,
+      "name": "前ウエスト",
+      "part": "front"
+    },
+    "frontHip": {
+      "x": 200,
+      "y": 610,
+      "name": "前ヒップ",
+      "part": "front"
+    },
+    "backShoulder": {
+      "x": 438,
+      "y": 44,
+      "name": "後肩先",
+      "part": "back"
+    },
+    "backArmhole": {
+      "x": 450,
+      "y": 215.99999999999997,
+      "name": "後袖ぐり",
+      "part": "back"
+    },
+    "backWaist": {
+      "x": 400,
+      "y": 430,
+      "name": "後ウエスト",
+      "part": "back"
+    },
+    "backHip": {
+      "x": 450,
+      "y": 610,
+      "name": "後ヒップ",
+      "part": "back"
+    }
+  },
+  "lineAdjustments": {},
+  "zoom": 1,
+  "currentMode": "draft"
+}
